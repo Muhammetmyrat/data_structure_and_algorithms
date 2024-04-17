@@ -30,7 +30,7 @@ console.log(fibEffective(100))
 
 //Memoization
 
-// O(2^n)
+// O(n)
 const fibNativeMemoization = (n, mem) => {
   if (mem[n] !== -1) return mem[n]
   if (n <= 1) return n
@@ -41,4 +41,4 @@ const fibNativeMemoization = (n, mem) => {
 
 const n = 100
 const mem = new Array(n + 1).fill(-1)
-console.log(fibNativeMemoization(n, mem))
+// console.log(fibNativeMemoization(n, mem))
