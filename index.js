@@ -26,7 +26,7 @@ const fibEffective = (n) => {
 }
 
 // console.log(fibNative(5))
-console.log(fibEffective(100))
+// console.log(fibEffective(100))
 
 //Memoization
 
@@ -42,3 +42,51 @@ const fibNativeMemoization = (n, mem) => {
 const n = 100
 const mem = new Array(n + 1).fill(-1)
 // console.log(fibNativeMemoization(n, mem))
+
+
+const arr = [3, 1, 5, 9, 9, 7]
+
+function getMaxNumberInArray(arr) {
+    const arrSorted = arr.sort()
+
+    let result = ''
+
+    for(i = arrSorted.length - 1; i >= 0; i--) {
+        result += arrSorted[i]
+    }
+
+    return result
+}
+
+// console.log(getMaxNumberInArray(arr));
+
+const stations = [0, 200, 375, 550, 750, 950]
+
+function minStops(stations, capacity) {
+    let result = 0
+    let currentStop = 0
+
+    while(currentStop < stations.length - 1) {
+        let nextStop = currentStop
+
+        while(nextStop < stations.length - 1 && stations[nextStop + 1] - stations[currentStop] <= capacity) {
+            nextStop++
+            console.log('nextStop1', nextStop);
+        }
+        console.log('nextStop2', nextStop, stations.length - 1);
+
+        if(nextStop === currentStop) {
+            return -1
+        }
+
+        if(nextStop < stations.length - 1) {
+            result++
+        }
+
+        currentStop = nextStop
+    }
+
+    return result
+}
+
+console.log('minStops', minStops(stations, 400))
