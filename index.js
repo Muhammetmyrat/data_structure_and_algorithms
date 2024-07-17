@@ -89,4 +89,67 @@ function minStops(stations, capacity) {
     return result
 }
 
-console.log('minStops', minStops(stations, 400))
+// console.log('minStops', minStops(stations, 400))
+
+// const items = [{w: 4, v: 20}, {w: 3, v: 18}, {w: 2, v: 14}]
+// const w = 7
+
+function fractionalKnapsack(items, w) {
+    const sortedItems = items.sort((a, b) => a.v / b.v).reverse()
+
+    let weightSoFar = 0
+    let valueSoFar = 0
+    let currentItem = 0
+
+    while(currentItem < sortedItems.length && weightSoFar < w) {
+        if(weightSoFar < sortedItems[currentItem].w) {
+
+            weightSoFar += sortedItems[currentItem].w
+            valueSoFar += sortedItems[currentItem].v
+        } else {
+            // valueSoFar += (((w - weightSoFar) / sortedItems[currentItem].w)  * sortedItems[currentItem].v)
+
+            const maxWeight = w - weightSoFar
+
+            const maxValue = sortedItems[currentItem].v / maxWeight
+
+            valueSoFar += maxValue
+
+            weightSoFar = w
+        }
+        currentItem++
+    }
+
+
+    return valueSoFar
+}
+
+// console.log(fractionalKnapsack(items, w));
+
+
+function binarySearch(a, key) {
+    let low = 0
+    let high = a.length - 1
+
+    const sortA = a.sort((a, b) => a - b)
+    
+    while (low <= high) {
+        let middle = Math.floor((low + high) / 2)
+
+        if(key < sortA[middle]) {
+            high = middle - 1
+        } else if(key > sortA[middle]) {
+            low = middle + 1
+        } else {
+            return middle
+        }
+
+    }
+
+    return -1
+}
+
+const a = [-1, 4, 13, 6, 2, 11, 12, 4, 1, 8, 9, 10]
+const f = 9
+
+console.log(binarySearch(a, f))
