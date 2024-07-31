@@ -71,9 +71,9 @@ function minStops(stations, capacity) {
 
         while(nextStop < stations.length - 1 && stations[nextStop + 1] - stations[currentStop] <= capacity) {
             nextStop++
-            console.log('nextStop1', nextStop);
+            console.log('nextStop1', nextStop)
         }
-        console.log('nextStop2', nextStop, stations.length - 1);
+        console.log('nextStop2', nextStop, stations.length - 1)
 
         if(nextStop === currentStop) {
             return -1
@@ -124,7 +124,7 @@ function fractionalKnapsack(items, w) {
     return valueSoFar
 }
 
-// console.log(fractionalKnapsack(items, w));
+// console.log(fractionalKnapsack(items, w))
 
 
 function binarySearch(a, key) {
@@ -152,4 +152,25 @@ function binarySearch(a, key) {
 const a = [-1, 4, 13, 6, 2, 11, 12, 4, 1, 8, 9, 10]
 const f = 9
 
-console.log(binarySearch(a, f))
+// console.log(binarySearch(a, f))
+
+function rob(nums) {
+  if(nums.length === 0)  return 0
+
+  if(nums.length === 1) return nums[0]
+
+  const dp = Array(nums.length)
+
+  dp[0] = nums[0]
+  dp[1] = nums[1]
+
+  for(let i = 2; i < nums.length; i++) {
+    dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1])
+  }
+
+  return dp[nums.length - 1]
+}
+
+const nums = [4, 11, 10, 1, 2, 8, 5]
+
+console.log(rob(nums))
