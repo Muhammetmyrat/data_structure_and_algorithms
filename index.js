@@ -171,6 +171,58 @@ function rob(nums) {
   return dp[nums.length - 1]
 }
 
-const nums = [4, 11, 10, 1, 2, 8, 5]
+// const nums = [4, 11, 10, 1, 2, 8, 5]
 
-console.log(rob(nums))
+// console.log(rob(nums))
+
+function hIndex(citations) {
+  let n = citations.length
+
+  for(let hIndex = 1; hIndex <= n; hIndex++) {
+    let count = 0
+
+    for(let i = 0; i < n; i++) {
+
+      if(citations[i] >= hIndex) {
+
+        count++
+      }
+    }
+    if(count < hIndex) {
+      return hIndex - 1
+    }
+  }
+  return n
+}
+
+function hIndex1(citations) {
+  let n = citations.length
+
+  let counts = new Array(n + 1).fill(0)
+
+  for(let citation of citations) {
+    if(citation >= n) {
+      counts[n]++
+    } else {
+      counts[citation]++
+    }
+  }
+
+  let pos = 0
+
+  for(let i = 0; i <= n; i++) {
+    for(let j = 0; j < counts[i]; j++) {
+      citations[pos] = i
+      pos++
+    }
+  }
+
+
+  return hIndex(citations)
+}
+
+let citations = [3, 0, 1, 7, 1, 6]
+
+// console.log(hIndex(citations))
+
+console.log(hIndex1(citations))
