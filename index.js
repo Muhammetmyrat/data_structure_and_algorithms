@@ -221,8 +221,79 @@ function hIndex1(citations) {
   return hIndex(citations)
 }
 
-let citations = [3, 0, 1, 7, 1, 6]
+// let citations = [3, 0, 1, 7, 1, 6]
 
 // console.log(hIndex(citations))
 
-console.log(hIndex1(citations))
+// console.log(hIndex1(citations))
+
+function max(arr) {
+  return arr.length === 0 ? Number.MIN_VALUE : Math.max(...arr)
+}
+
+function min(arr) {
+  return arr.length === 0 ? Number.MAX_VALUE : Math.min(...arr)
+}
+
+// function findMaxValue(arr) {
+//   if(arr.length === 0) {
+//     return 0
+//   }
+
+//   let tmpMin = arr[0]
+//   let tmpMax = arr[0]
+
+//   let mins = new Array(4).fill(0)
+//   let maxs = new Array(4).fill(0)
+
+//   for(let i = 1; i < arr.length; i++) {
+//     mins[0] = tmpMin - arr[i]
+//     maxs[0] = tmpMax - arr[i]
+
+//     mins[1] = tmpMin + arr[i]
+//     maxs[1] = tmpMax + arr[i]
+
+//     mins[2] = tmpMin * arr[i]
+//     maxs[2] = tmpMax * arr[i]
+
+//     if(arr[i] !== 0) {
+//       mins[3] = tmpMin / arr[i]
+//       maxs[3] = tmpMax / arr[i]
+//     }
+
+//     console.log(mins, maxs);
+
+//     tmpMax = Math.max(max(mins), max(maxs))
+//     tmpMin = Math.min(min(mins), min(maxs))
+//   }
+
+//   return tmpMax
+// }
+
+function findMaxValue(arr) {
+  if (arr.length === 0) return 0
+
+  let tmpMin = arr[0], tmpMax = arr[0]
+
+  for (let i = 1; i < arr.length; i++) {
+    const val = arr[i]
+    const candidates = [
+      tmpMin - val, tmpMax - val,
+      tmpMin + val, tmpMax + val,
+      tmpMin * val, tmpMax * val,
+      val !== 0 ? tmpMin / val : Number.MIN_VALUE,
+      val !== 0 ? tmpMax / val : Number.MAX_VALUE
+    ]
+    console.log(...candidates)
+    tmpMax = Math.max(...candidates)
+    tmpMin = Math.min(...candidates)
+
+    console.log(tmpMax, tmpMin)
+  }
+
+  return tmpMax
+}
+
+const array = [1, -3, 0.1, -5]
+
+console.log(findMaxValue(array))
